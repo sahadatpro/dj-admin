@@ -41,6 +41,7 @@ DJ_APP = [
 
 LOCAL_APP = [
     'blog',
+    'bookstore'
 ]
 
 THIRDPARTY_APP = []
