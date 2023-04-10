@@ -1,5 +1,5 @@
 from django.contrib import admin
-from blog.models import Post
+from blog.models import Post, Category
 
 class BlogAdminArea(admin.AdminSite):
     site_header = "Blog Admin Area"
@@ -9,8 +9,11 @@ class BlogAdminArea(admin.AdminSite):
 
 blog_admin = BlogAdminArea(name="BlogAdmin")
 
+
+blog_admin.register(Category)
+
 class PostAdmin(admin.ModelAdmin):
-    list_display = ['title', 'published', 'publish', 'created']
+    list_display = ['title', 'status', 'publish', 'created']
 
 blog_admin.empty_value_display = "(None)"
 
