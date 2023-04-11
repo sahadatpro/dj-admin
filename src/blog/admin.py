@@ -1,6 +1,8 @@
 from django.contrib import admin
 from blog.models import Post, Category
 from django import forms
+from django_summernote.admin import SummernoteModelAdmin
+from django_summernote.models import Attachment 
 
 class BlogAdminArea(admin.AdminSite):
     site_header = "Blog Admin Area"
@@ -21,8 +23,10 @@ class PostAdminForm(forms.ModelForm):
         exclude = ['']
     
 
+class SummerAdmin(SummernoteModelAdmin):
+    summernote_fields = "__all__"
 
-class PostAdmin(admin.ModelAdmin):
+class PostAdmin(SummerAdmin):
     list_display = ['title', 'status', 'publish', 'created']
 
     # form = PostAdminForm
@@ -45,4 +49,3 @@ class PostAdmin(admin.ModelAdmin):
 blog_admin.empty_value_display = "(None)"
 
 blog_admin.register(Post, PostAdmin)
-
