@@ -26,3 +26,26 @@ class Post(models.Model):
 
     def __str__(self) -> str:
         return self.title    
+
+
+
+class Profile(models.Model):
+    ROLE_OPTION = (
+        ('author', 'Author'),
+        ('publisher', 'Publisher'),
+        ('reader', 'Reader'),
+    )
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    is_active = models.BooleanField(default=True)
+    dob = models.DateField(null=True, blank=True)
+    role = models.CharField(max_length=20, choices=ROLE_OPTION, default='reader')
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    @property
+    def email(self):
+        return f"{self.user.email}"
+    
+    def __str__(self) -> str:
+        return self.user.username
+    
